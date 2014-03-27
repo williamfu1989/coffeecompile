@@ -3,7 +3,7 @@
   "main": "./lib/coffeecompile",
   "version": "0.1.0",
   "description": "A short description of your package",
-  "repository": "https://github.com/atom/coffeecompile",
+  "repository": "https://github.com/williamfu1989/coffeecompile.git",
   "license": "MIT",
   "engines": {
     "atom": ">0.50.0"
