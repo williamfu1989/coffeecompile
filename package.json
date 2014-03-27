@@ -1,7 +1,7 @@
 {
-  "name": "coffeecompile",
+  "name": "CoffeeCompile",
   "main": "./lib/coffeecompile",
-  "version": "0.0.1",
+  "version": "0.1.0",
   "description": "A short description of your package",
   "repository": "https://github.com/atom/coffeecompile",
   "license": "MIT",

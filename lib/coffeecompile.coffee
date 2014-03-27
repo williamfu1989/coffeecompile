@@ -5,11 +5,14 @@ fs = require 'fs'
 
 module.exports =
   coffeecompileView: null
+  configDefaults:
+    compileOnSave: true
 
   activate: (state) ->
-    atom.workspaceView.command 'coffeecompile:compile', (e) =>
-      e.abortKeyBinding()
-      @compileOnSave()
+    if atom.config.get 'coffeecompile.compileOnSave'
+      atom.workspaceView.command 'coffeecompile:compile', (e) =>
+        e.abortKeyBinding()
+        @compileOnSave()
 
     # @coffeecompileView = new CoffeecompileView(state.coffeecompileViewState)
 
