@@ -6,7 +6,7 @@
   {
     'label': 'Packages'
     'submenu': [
-      'label': 'coffeecompile'
+      'label': 'CoffeeCompile'
       'submenu': [
         { 'label': 'Compile', 'command': 'coffeecompile:compile' }
       ]

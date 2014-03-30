@@ -9,12 +9,10 @@ module.exports =
     compileOnSave: true
 
   activate: (state) ->
-    if atom.config.get 'coffeecompile.compileOnSave'
-      atom.workspaceView.command 'coffeecompile:compile', (e) =>
-        e.abortKeyBinding()
+    atom.workspaceView.command 'coffeecompile:compile', (e) =>
+      e.abortKeyBinding()
+      if atom.config.get 'CoffeeCompile.compileOnSave'
         @compileOnSave()
-
-    # @coffeecompileView = new CoffeecompileView(state.coffeecompileViewState)
 
   compileOnSave: ->
     editor = atom.workspace.getActiveEditor()
