@@ -1,7 +1,7 @@
 {
   "name": "CoffeeCompile",
-  "main": "./lib/coffeecompile",
-  "version": "0.3.0",
+  "main": "./lib/main",
+  "version": "0.3.1",
   "description": "Auto compile coffee to js on save.",
   "repository": "https://github.com/williamfu1989/coffeecompile.git",
   "license": "MIT",
@@ -9,6 +9,7 @@
     "atom": ">0.50.0"
   },
   "dependencies": {
+    "emissary": "*",
     "coffee-script": "*"
   }
 }

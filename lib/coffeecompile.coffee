@@ -1,23 +1,25 @@
-CoffeecompileView = require './coffeecompile-view'
-
-coffee = require 'coffee-script'
+{Subscriber} = require 'emissary'
 fs = require 'fs'
+coffeescript = require 'coffee-script'
 
 module.exports =
-  coffeecompileView: null
-  configDefaults:
-    compileOnSave: true
-
-  activate: (state) ->
+class CoffeeCompile
+  Subscriber.includeInto(this)
+  constructor: ->
+    @subscribe atom.workspace.eachEditor (editor) =>
+      @handleEvents(editor)
     atom.workspaceView.command 'coffeecompile:compile', (e) =>
-      e.abortKeyBinding()
-      if atom.config.get 'CoffeeCompile.compileOnSave'
-        @compileOnSave()
+      @compileOnSave()
 
-  compileOnSave: ->
-    editor = atom.workspace.getActiveEditor()
+  handleEvents: (editor) ->
+    buffer = editor.getBuffer()
+    bufferSavedSubscription = @subscribe buffer, 'will-be-saved', =>
+      if atom.config.get "CoffeeCompile.compileOnSave"
+        @compileOnSave editor
+
+  compileOnSave: (editor) ->
     path = editor.getPath()
     if path.indexOf(".coffee") > -1
       newPath = path.substr(0,path.length-6) + "js"
-      compiled = coffee.compile editor.getText()
+      compiled = coffeescript.compile editor.getText()
       fs.writeFile newPath, compiled
