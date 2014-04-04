@@ -9,7 +9,7 @@ class CoffeeCompile
     @subscribe atom.workspace.eachEditor (editor) =>
       @handleEvents(editor)
     atom.workspaceView.command 'coffeecompile:compile', (e) =>
-      @compileOnSave()
+      @compileOnSave(atom.workspace.getActiveEditor())
 
   handleEvents: (editor) ->
     buffer = editor.getBuffer()
