@@ -9,6 +9,7 @@
       'label': 'CoffeeCompile'
       'submenu': [
         { 'label': 'Compile', 'command': 'coffeecompile:compile' }
+        { 'label': 'Preview', 'command': 'coffeecompile:preview' }
       ]
     ]
   }
