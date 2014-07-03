@@ -1,13 +1,21 @@
 {View} = require 'atom'
 
 module.exports =
-class CoffeecompileView extends View
-  @content: ->
-    @div class: 'coffeecompile overlay from-top', =>
-      @div "The Coffeecompile package is Alive! It's ALIVE!", class: "message"
+class CoffeeCompileView extends View
+  @content: (compiled) ->
+    @div =>
+      @span compiled
 
   initialize: (serializeState) ->
-    atom.workspaceView.command "coffeecompile:toggle", => @toggle()
+
+  getTitle: ->
+    @title
+
+  setTitle: (title) ->
+    @title = title
+
+  setContent: (compiled) ->
+    @compiled = compiled
 
   # Returns an object that can be retrieved when package is activated
   serialize: ->
