@@ -1,10 +1,12 @@
 {View} = require 'atom'
+{EditorView} = require 'atom'
 
 module.exports =
 class CoffeeCompileView extends View
-  @content: (compiled) ->
-    @div =>
-      @span compiled
+  @content: () ->
+    @div class: 'coffeecompile native-key-bindings', tabindex: -1, =>
+      @div class: 'editor editor-colors', =>
+        @div outlet: "compiled", class: 'lang-javascript lines'
 
   initialize: (serializeState) ->
 
@@ -30,3 +32,14 @@ class CoffeeCompileView extends View
       @detach()
     else
       atom.workspaceView.append(this)
+
+  render: (text) ->
+    grammar = atom.syntax.selectGrammar("hello.js", text)
+
+    for tokens in grammar.tokenizeLines(text)
+      attributes = class: "line"
+      @compiled.append EditorView.buildLineHtml({tokens, text, attributes})
+
+    @compiled.css
+      fontSize: atom.config.get('editor.fontSize') or 12
+      fontFamily: atom.config.get('editor.fontFamily')

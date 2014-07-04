@@ -26,9 +26,9 @@ class CoffeeCompile
     editor = atom.workspace.getActiveEditor()
     path = editor.getPath()
     if path.indexOf(".coffee") > -1
-      newPath = path.substr(0,path.length-6) + "js"
+      jsPath = path.substr(0,path.length-6) + "js"
       compiled = coffeescript.compile editor.getText()
-      fs.writeFile newPath, compiled
+      fs.writeFile jsPath, compiled
 
   previewCompile: () ->
     view = atom.workspaceView.getActiveView()
@@ -38,22 +38,18 @@ class CoffeeCompile
     pane = atom.workspace.getActivePane()
     newPane = pane.splitRight()
     text = coffeescript.compile editor.getText()
-    try
-      text = @compile code
-    catch e
-      text = e.stack
 
-    grammar = atom.syntax.selectGrammar("hello.js", text)
-
-    for tokens in grammar.tokenizeLines(text)
-      attributes = class: "line"
-      console.log EditorView.buildLineHtml({tokens, text, attributes})
-    console.log @compiledCode
+    # grammar = atom.syntax.selectGrammar("hello.js", text)
+    #
+    # for tokens in grammar.tokenizeLines(text)
+    #   attributes = class: "line"
+    #   console.log EditorView.buildLineHtml({tokens, text, attributes})
     # #view.splitRight()
     # editorView = new EditorView(mini: true)
     # editorView.text compiled
     # newPane.activate()
-    view = new CoffeeCompileView(compiled)
+    view = new CoffeeCompileView()
+    view.render(text)
     view.setTitle title.substring(0, title.length-6)+'js'
     newPane.addItem view, 0
 
