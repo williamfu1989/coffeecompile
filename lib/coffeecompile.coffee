@@ -33,24 +33,12 @@ class CoffeeCompile
   previewCompile: () ->
     view = atom.workspaceView.getActiveView()
     editor = view.getEditor()
-    # path = editor.getPath()
     title = editor.getTitle()
     pane = atom.workspace.getActivePane()
     newPane = pane.splitRight()
     text = coffeescript.compile editor.getText()
 
-    # grammar = atom.syntax.selectGrammar("hello.js", text)
-    #
-    # for tokens in grammar.tokenizeLines(text)
-    #   attributes = class: "line"
-    #   console.log EditorView.buildLineHtml({tokens, text, attributes})
-    # #view.splitRight()
-    # editorView = new EditorView(mini: true)
-    # editorView.text compiled
-    # newPane.activate()
     view = new CoffeeCompileView()
     view.render(text)
     view.setTitle title.substring(0, title.length-6)+'js'
     newPane.addItem view, 0
-
-    # atom.workspaceView.appendToRight(new View)
